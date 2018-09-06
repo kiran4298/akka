@@ -5,7 +5,7 @@
 	<artifactId>timeshift-gradle</artifactId>
 	<packaging>jar</packaging>
 	<version>1.0</version>
-	<name>aspect Maven Webapp</name>
+	<name>aspect  Maven Webapp</name>
 	<url>http://maven.apache.org</url>
        
        <properties>

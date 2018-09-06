@@ -1,0 +1,21 @@
+<!DOCTYPE aspectj PUBLIC
+        "-//AspectJ//DTD//EN" "http://www.eclipse.org/aspectj/dtd/aspectj.dtd">
+<aspectj>
+<!--  -verbose -showWeaveInfo -Xset:weaveJavaxPackages=true -Xset:weaveJavaPackages=true -->
+   <weaver options="-showWeaveInfo -verbose -Xset:weaveJavaxPackages=true -Xset:weaveJavaPackages=true">
+
+        <!-- only weave classes in our application-specific packages -->
+       
+       
+		<include within="java.lang.System"/>
+		<include within="java.util.Date"/>
+    </weaver>
+
+    <aspects>
+
+        <!-- weave in just this aspect -->        
+        <aspect name="com.sample.akka.TimingAspect"/>
+
+    </aspects>
+
+  </aspectj>

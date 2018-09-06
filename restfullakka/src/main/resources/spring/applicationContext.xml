@@ -1,0 +1,34 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	  xmlns:akka="http://repo.akka.io/schema/akka"
+	  xmlns:aop="http://www.springframework.org/schema/aop"
+	  xmlns:jee="http://www.springframework.org/schema/jee" 
+	  	
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans	
+		http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+		http://repo.akka.io/schema/akka
+      	 http://repo.akka.io/akka-1.3.1.xsd
+		 
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context-4.0.xsd
+		
+		http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop/spring-aop-4.0.xsd 
+		http://www.springframework.org/schema/jee 
+		http://www.springframework.org/schema/jee/spring-jee-4.0.xsd">
+ 	<context:spring-configured/>
+	<context:component-scan   base-package="com.sample.rest, com.sample.akka" />
+	<context:annotation-config/>
+	
+   
+
+  	<bean id="actorSystem" class="akka.actor.ActorSystem" factory-method="create">
+  	  <constructor-arg value="FLactorSystem"/>
+  	  <constructor-arg><bean id="config" class="com.typesafe.config.ConfigFactory" factory-method="load"/></constructor-arg>
+  	</bean>	 
+	
+	
+</beans>
+

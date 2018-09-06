@@ -1,0 +1,44 @@
+<configuration>
+
+    <appender name="AKKA_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${catalina.base}/log/akka.log</file>
+        <!-- rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+      		<fileNamePattern>akka.%i.log.zip</fileNamePattern>
+      		<minIndex>1</minIndex>
+      		<maxIndex>20</maxIndex>
+    	</rollingPolicy>
+       <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+      		<maxFileSize>10KB</maxFileSize>
+    	</triggeringPolicy>-->
+    	<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <!-- rollover daily -->
+      <fileNamePattern>${catalina.base}/log/akka-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+      <timeBasedFileNamingAndTriggeringPolicy
+            class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+        <!-- or whenever the file size reaches 100MB -->
+        <maxFileSize>10KB</maxFileSize>
+        <!-- maxHistory>20</maxHistory-->
+      </timeBasedFileNamingAndTriggeringPolicy>
+    </rollingPolicy>
+    	
+        <append>true</append>
+        <encoder>
+            <!-- pattern>%date{yyyy-MM-dd} %X{akkaTimestamp} %-5level[%thread] %logger{1} - %msg%n</pattern-->
+             <pattern> %d{ISO8601} [%thread]  %-5level  %logger - %msg%n</pattern>
+              <immediateFlush>true</immediateFlush>
+        </encoder>
+    </appender>
+    
+    <logger name="akka.actor" level="DEBUG">
+        <appender-ref ref="AKKA_FILE"/>
+    </logger>
+    
+    <logger name="com.sample.akka" level="DEBUG">
+        <appender-ref ref="AKKA_FILE"/>
+    </logger>
+
+    <root level="OFF">
+        <appender-ref ref="AKKA_FILE"/>
+    </root>
+    
+</configuration>
